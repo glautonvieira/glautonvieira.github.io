@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glauton Vieira — SDET & QA Engineer</title>
+<meta name="description" content="Glauton Vieira — Software Development Engineer in Test (SDET) at TELUS Health. 13+ years in QA, test automation, and quality engineering.">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#070710;--bg2:#0d0d1a;--bg3:#151528;--card:#1a1a30;--card2:#1e1e3a;
+  --text:#e4e4f0;--muted:#7a7a98;--dim:#50506a;
+  --cyan:#00d4ff;--purple:#7b2ff7;--coral:#ff6b6b;--gold:#ffd700;--teal:#2ee8b7;--green:#4ade80;
+  --grad:linear-gradient(135deg,var(--cyan),var(--purple));
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:'SF Mono','Fira Code','JetBrains Mono',Consolas,monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.65}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,212,255,.25)}
+
+/* ───── NAV ───── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease}
+.nav.scrolled{background:rgba(7,7,16,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(122,122,152,.1);padding:.7rem 2rem}
+.nav-logo{font-size:1.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.5px}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-size:.85rem;color:var(--muted);transition:color .3s;position:relative;letter-spacing:.3px}
+.nav-links a:hover{color:var(--text)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--grad);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.nav-toggle span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+
+/* ───── HERO ───── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#particles-canvas{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:1;text-align:center;padding:2rem;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:50px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.15);font-size:.75rem;color:var(--cyan);font-family:var(--mono);margin-bottom:1.5rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s forwards}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+.hero-name{font-size:clamp(2.5rem,7vw,4.8rem);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:.75rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .4s forwards}
+.hero-name .gradient{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-title{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--muted);margin-bottom:.5rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .55s forwards}
+.hero-title strong{color:var(--text);font-weight:600}
+.hero-roles{font-size:clamp(.9rem,2vw,1.15rem);color:var(--cyan);min-height:1.8em;margin-bottom:2rem;font-family:var(--mono);opacity:0;transform:translateY(20px);animation:fadeUp .8s .7s forwards}
+.hero-roles .cursor{display:inline-block;width:2px;height:1.1em;background:var(--cyan);margin-left:2px;vertical-align:text-bottom;animation:blink 1s step-end infinite}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(20px);animation:fadeUp .8s .85s forwards}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.6rem;border-radius:50px;font-size:.875rem;font-weight:600;transition:all .3s;cursor:pointer;border:none;font-family:var(--font)}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 4px 20px rgba(0,212,255,.2)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,.3)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(122,122,152,.25)}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeUp .8s 1.1s forwards}
+.scroll-indicator span{font-size:.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.scroll-arrow{width:20px;height:30px;border:2px solid rgba(122,122,152,.3);border-radius:10px;position:relative}
+.scroll-arrow::before{content:'';position:absolute;top:6px;left:50%;width:3px;height:7px;background:var(--cyan);border-radius:2px;transform:translateX(-50%);animation:scrollBounce 2s infinite}
+
+/* ───── SECTIONS ───── */
+section{padding:6rem 2rem}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-label{font-family:var(--mono);font-size:.75rem;color:var(--cyan);text-transform:uppercase;letter-spacing:3px;margin-bottom:.75rem}
+.section-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-1px}
+.container{max-width:1100px;margin:0 auto}
+
+/* ───── ABOUT ───── */
+.about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:center}
+.about-avatar{position:relative;width:200px;height:200px;margin:0 auto}
+.about-avatar-ring{position:absolute;inset:-8px;border-radius:50%;background:var(--grad);opacity:.45;animation:spin 10s linear infinite;filter:blur(1px)}
+.about-avatar-img{position:relative;width:200px;height:200px;border-radius:50%;overflow:hidden;border:3px solid var(--bg2);z-index:1;display:flex;align-items:center;justify-content:center;background:var(--card);font-size:4.5rem;font-weight:800;color:var(--cyan)}
+.about-avatar-img img{width:100%;height:100%;object-fit:cover}
+.about-text h3{font-size:1.4rem;margin-bottom:.75rem}
+.about-text h3 .company{color:var(--cyan);font-weight:600}
+.about-text p{color:var(--muted);margin-bottom:1rem;font-size:.95rem}
+.about-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+.about-tag{padding:.3rem .7rem;border-radius:6px;font-size:.7rem;font-family:var(--mono);background:rgba(123,47,247,.08);color:var(--purple);border:1px solid rgba(123,47,247,.12)}
+.about-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:2rem}
+.stat{text-align:center;padding:1rem 1.2rem;background:var(--card);border-radius:12px;border:1px solid rgba(122,122,152,.08);min-width:90px;transition:all .3s}
+.stat:hover{border-color:rgba(0,212,255,.2);transform:translateY(-2px)}
+.stat-number{font-size:1.6rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:.2rem}
+
+/* ───── SKILLS ───── */
+.skills{background:var(--bg)}
+.skills-container{position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(122,122,152,.08);background:var(--bg2)}
+#physics-canvas{width:100%;display:block;cursor:grab}
+#physics-canvas:active{cursor:grabbing}
+.skills-hint{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);font-size:.72rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;pointer-events:none;opacity:.7;transition:opacity .5s}
+.skills-hint svg{width:16px;height:16px}
+.skills-reset{position:absolute;top:1rem;right:1rem;background:rgba(122,122,152,.12);border:1px solid rgba(122,122,152,.15);color:var(--muted);padding:.35rem .75rem;border-radius:8px;font-size:.68rem;cursor:pointer;font-family:var(--mono);transition:all .3s;z-index:2}
+.skills-reset:hover{background:rgba(0,212,255,.12);border-color:var(--cyan);color:var(--cyan)}
+
+/* ───── EXPERIENCE ───── */
+.experience{background:var(--bg2)}
+.exp-grid{display:flex;flex-direction:column;gap:1.5rem}
+.exp-card{background:var(--card);border-radius:16px;padding:1.75rem;border:1px solid rgba(122,122,152,.08);transition:all .4s;position:relative;overflow:hidden}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:0 3px 3px 0;transition:all .3s}
+.exp-card:nth-child(1)::before{background:var(--grad)}
+.exp-card:nth-child(2)::before{background:linear-gradient(to bottom,var(--coral),var(--gold))}
+.exp-card:nth-child(3)::before{background:linear-gradient(to bottom,var(--purple),var(--cyan))}
+.exp-card:nth-child(4)::before{background:linear-gradient(to bottom,var(--teal),var(--green))}
+.exp-card:nth-child(5)::before{background:linear-gradient(to bottom,var(--gold),var(--coral))}
+.exp-card:hover{border-color:rgba(0,212,255,.15);transform:translateX(4px)}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.exp-role{font-size:1.1rem;font-weight:700}
+.exp-badge{padding:.25rem .65rem;border-radius:6px;font-size:.68rem;font-family:var(--mono);white-space:nowrap}
+.exp-badge.current{background:rgba(46,232,183,.1);color:var(--teal);border:1px solid rgba(46,232,183,.15)}
+.exp-badge.past{background:rgba(122,122,152,.08);color:var(--muted);border:1px solid rgba(122,122,152,.1)}
+.exp-company{font-size:.9rem;color:var(--cyan);font-weight:600;margin-bottom:.25rem}
+.exp-meta{font-size:.78rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+.exp-meta span{display:flex;align-items:center;gap:.3rem}
+.exp-desc{color:var(--muted);font-size:.85rem;line-height:1.7}
+.exp-desc li{margin-bottom:.35rem;padding-left:.5rem}
+.exp-desc ul{list-style:none}
+.exp-desc li::before{content:'→';color:var(--cyan);margin-right:.5rem;font-size:.75rem}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.exp-tag{padding:.2rem .5rem;border-radius:5px;font-size:.65rem;font-family:var(--mono);background:rgba(0,212,255,.06);color:rgba(0,212,255,.7);border:1px solid rgba(0,212,255,.08)}
+
+/* ───── CERTIFICATIONS ───── */
+.certifications{background:var(--bg)}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+.cert-card{background:var(--card);border-radius:12px;padding:1.25rem;border:1px solid rgba(122,122,152,.08);transition:all .3s;position:relative;overflow:hidden}
+.cert-card:hover{border-color:rgba(0,212,255,.15);transform:translateY(-3px)}
+.cert-card .cert-icon{font-size:1.5rem;margin-bottom:.75rem}
+.cert-card .cert-name{font-size:.88rem;font-weight:600;margin-bottom:.35rem;line-height:1.3}
+.cert-card .cert-issuer{font-size:.75rem;color:var(--muted);margin-bottom:.5rem}
+.cert-card .cert-date{font-size:.7rem;font-family:var(--mono);color:var(--cyan);padding:.2rem .5rem;background:rgba(0,212,255,.06);border-radius:4px;display:inline-block}
+.cert-card.gcp{border-left:3px solid #4285f4}
+.cert-card.qa{border-left:3px solid var(--teal)}
+.cert-card.devops{border-left:3px solid var(--gold)}
+.cert-card.ai{border-left:3px solid var(--purple)}
+
+/* ───── EDUCATION ───── */
+.education{background:var(--bg2)}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.edu-card{background:var(--card);border-radius:16px;padding:1.75rem;border:1px solid rgba(122,122,152,.08);transition:all .3s}
+.edu-card:hover{border-color:rgba(123,47,247,.2);transform:translateY(-3px)}
+.edu-card .edu-icon{font-size:2rem;margin-bottom:1rem}
+.edu-card .edu-degree{font-size:1rem;font-weight:700;margin-bottom:.35rem}
+.edu-card .edu-school{font-size:.9rem;color:var(--cyan);font-weight:600;margin-bottom:.25rem}
+.edu-card .edu-date{font-size:.75rem;font-family:var(--mono);color:var(--muted);margin-bottom:.75rem}
+.edu-card .edu-desc{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+/* ───── PROJECTS ───── */
+.projects{background:var(--bg)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.project-card{position:relative;background:var(--card);border-radius:16px;padding:1.5rem;border:1px solid rgba(122,122,152,.08);transition:all .4s;transform-style:preserve-3d;cursor:default;overflow:hidden;display:block}
+.project-card::before{content:'';position:absolute;inset:0;border-radius:16px;background:linear-gradient(135deg,rgba(0,212,255,.04),rgba(123,47,247,.04));opacity:0;transition:opacity .4s}
+.project-card:hover::before{opacity:1}
+.project-card:hover{border-color:rgba(0,212,255,.18);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.project-card .glare{position:absolute;inset:0;border-radius:16px;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(circle at var(--glare-x,50%) var(--glare-y,50%),rgba(255,255,255,.05),transparent 60%)}
+.project-card:hover .glare{opacity:1}
+.project-icon{font-size:1.5rem;margin-bottom:.75rem}
+.project-title{font-size:1.05rem;font-weight:700;margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+.project-title svg{width:14px;height:14px;color:var(--muted);transition:color .3s;flex-shrink:0}
+.project-card:hover .project-title svg{color:var(--cyan)}
+.project-desc{color:var(--muted);font-size:.82rem;margin-bottom:1rem;line-height:1.6}
+.project-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.project-tag{padding:.2rem .5rem;border-radius:5px;font-size:.65rem;font-family:var(--mono);background:rgba(0,212,255,.06);color:var(--cyan);border:1px solid rgba(0,212,255,.1)}
+
+/* ───── CONTACT ───── */
+.contact{background:var(--bg2)}
+.contact-content{text-align:center}
+.contact-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;margin-bottom:1rem;letter-spacing:-1px}
+.contact-subtitle{color:var(--muted);max-width:480px;margin:0 auto 2.5rem;font-size:.95rem}
+.contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.contact-link{display:flex;align-items:center;gap:.6rem;padding:.75rem 1.3rem;background:var(--card);border:1px solid rgba(122,122,152,.1);border-radius:12px;transition:all .3s;font-size:.88rem}
+.contact-link:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.contact-link svg{width:18px;height:18px;color:var(--cyan)}
+.footer{text-align:center;padding:2rem;border-top:1px solid rgba(122,122,152,.06);font-size:.72rem;color:var(--dim)}
+.footer .heart{color:var(--coral)}
+
+/* ───── SCROLL REVEAL ───── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+.reveal-delay-5{transition-delay:.5s}
+
+/* ───── KEYFRAMES ───── */
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);opacity:1}50%{transform:translateX(-50%) translateY(10px);opacity:.3}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ───── RESPONSIVE ───── */
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(7,7,16,.95);backdrop-filter:blur(20px);flex-direction:column;padding:1.5rem 2rem;gap:1rem;border-bottom:1px solid rgba(122,122,152,.1)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:flex}
+  .about-grid{grid-template-columns:1fr;text-align:center}
+  .about-stats{justify-content:center}
+  .about-tags{justify-content:center}
+  .projects-grid{grid-template-columns:1fr}
+  .certs-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+  section{padding:4rem 1.25rem}
+  .exp-header{flex-direction:column}
+}
+@media(max-width:480px){
+  .hero-cta{flex-direction:column;align-items:center}
+  .contact-links{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAVIGATION ═══════ -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">G.V</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" onclick="document.getElementById('nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="hero">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Available for opportunities
+    </div>
+    <h1 class="hero-name">Glauton <span class="gradient">Vieira</span></h1>
+    <p class="hero-title"><strong>SDET</strong> at TELUS Health · Edmonton, Canada 🇨🇦</p>
+    <p class="hero-roles"><span id="typewriter"></span><span class="cursor"></span></p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        13+ Years in QA
+      </a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">// about me</p>
+      <h2 class="section-title">Quality is Not an Act, It's a Habit</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-avatar reveal">
+        <div class="about-avatar-ring"></div>
+        <div class="about-avatar-img">
+          <img src="https://avatars.githubusercontent.com/u/11621414?v=4" alt="Glauton Vieira"
+               onerror="this.style.display='none';this.parentNode.textContent='G'">
+        </div>
+      </div>
+      <div class="about-text reveal reveal-delay-1">
+        <h3>SDET at <span class="company">TELUS Health</span></h3>
+        <p>
+          Software Development Engineer in Test with <strong>13+ years</strong> dedicated to
+          software quality. I specialize in building robust test automation architectures,
+          implementing SQA processes from the ground up, and ensuring quality at every stage
+          of the development cycle.
+        </p>
+        <p>
+          My journey spans across <strong>4 countries</strong> — from São Paulo to Mexico City,
+          San Francisco, and now Edmonton — working with e-commerce, insurance,
+          telecommunications, and healthcare platforms. Currently focused on
+          <strong>test architecture and cloud-native automation</strong>.
+        </p>
+        <div class="about-tags">
+          <span class="about-tag">Test Automation</span>
+          <span class="about-tag">CI/CD</span>
+          <span class="about-tag">BDD</span>
+          <span class="about-tag">Google Cloud</span>
+          <span class="about-tag">Agile/Scrum</span>
+          <span class="about-tag">SQA Processes</span>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-number" data-target="13">0</div>
+            <div class="stat-label">Years in QA</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" data-target="4">0</div>
+            <div class="stat-label">Countries</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number" data-target="500" data-suffix="+">0</div>
+            <div class="stat-label">Connections</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SKILLS (PHYSICS) ═══════ -->
+<section class="skills" id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">// skills & tools</p>
+      <h2 class="section-title">My Testing Arsenal</h2>
+    </div>
+    <div class="skills-container reveal">
+      <button class="skills-reset" onclick="resetPhysics()">↻ Reset</button>
+      <canvas id="physics-canvas"></canvas>
+      <div class="skills-hint" id="skills-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5"/></svg>
+        Click & drag to interact · Throw them around!
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ EXPERIENCE ═══════ -->
+<section class="experience" id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">// career journey</p>
+      <h2 class="section-title">Professional Experience</h2>
+    </div>
+    <div class="exp-grid">
+
+      <!-- TELUS Health -->
+      <div class="exp-card reveal">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Software Development Engineer in Test (SDET)</div>
+            <div class="exp-company">TELUS Health</div>
+          </div>
+          <span class="exp-badge current">● Present</span>
+        </div>
+        <div class="exp-meta">
+          <span>📅 Mar 2024 – Present</span>
+          <span>📍 Edmonton, Alberta, Canada</span>
+          <span>💼 Full-time</span>
+        </div>
+        <div class="exp-desc">
+          <ul>
+            <li>Working on test automation, software quality and automated testing frameworks development</li>
+            <li>Developing and maintaining automated test scripts, participating in code reviews</li>
+            <li>Implementing CI/CD testing pipelines and designing test architecture</li>
+            <li>Contributing to software development and quality engineering processes</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Cypress</span>
+          <span class="exp-tag">CI/CD</span>
+          <span class="exp-tag">Test Architecture</span>
+          <span class="exp-tag">Code Reviews</span>
+        </div>
+      </div>
+
+      <!-- Firstleaf -->
+      <div class="exp-card reveal reveal-delay-1">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Sr. Software Quality Assurance Engineer</div>
+            <div class="exp-company">Firstleaf</div>
+          </div>
+          <span class="exp-badge past">2 yrs 8 mos</span>
+        </div>
+        <div class="exp-meta">
+          <span>📅 Aug 2021 – Mar 2024</span>
+          <span>📍 San Francisco, US · Remote</span>
+          <span>💼 Contract</span>
+        </div>
+        <div class="exp-desc">
+          <ul>
+            <li>As the company's first QA, built the quality area from scratch and established testing practices</li>
+            <li>Participated in QA engineers hiring process (assessment creation, interviews)</li>
+            <li>Ran Agile transformation from the testing perspective — defining tools, roles, processes, metrics and deliverables</li>
+            <li>Wrote automated test scripts using JS with Cypress (UI/Web) and Ruby with RSpec (API testing)</li>
+            <li>Led a cross-cultural team across USA, Mexico, Colombia, Argentina, and Brazil</li>
+            <li>Reviewed code in JavaScript and Ruby from the quality perspective</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Cypress</span>
+          <span class="exp-tag">RSpec</span>
+          <span class="exp-tag">JavaScript</span>
+          <span class="exp-tag">Ruby</span>
+          <span class="exp-tag">Agile</span>
+        </div>
+      </div>
+
+      <!-- Runa HR -->
+      <div class="exp-card reveal reveal-delay-2">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Software Quality Assurance Automation Lead</div>
+            <div class="exp-company">Runa HR</div>
+          </div>
+          <span class="exp-badge past">1 yr 5 mos</span>
+        </div>
+        <div class="exp-meta">
+          <span>📅 Apr 2020 – Aug 2021</span>
+          <span>📍 Mexico City · Remote</span>
+          <span>💼 Contract</span>
+        </div>
+        <div class="exp-desc">
+          <ul>
+            <li>Established and developed QA processes, ensuring best practices across the team</li>
+            <li>Defined testing strategies to ensure product quality aligned with company standards</li>
+            <li>Point of contact for all QA aspects — providing QA services and coordinating resources</li>
+            <li>Facilitated risk identification meetings and created mitigation plans</li>
+            <li>Automated test scenarios to increase coverage (web & API) and shared knowledge on best practices</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">QA Leadership</span>
+          <span class="exp-tag">Test Strategy</span>
+          <span class="exp-tag">Risk Management</span>
+          <span class="exp-tag">Automation</span>
+        </div>
+      </div>
+
+      <!-- Youse Seguros -->
+      <div class="exp-card reveal reveal-delay-3">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Senior Software Quality Assurance Engineer</div>
+            <div class="exp-company">Youse Seguros</div>
+          </div>
+          <span class="exp-badge past">3 yrs 7 mos</span>
+        </div>
+        <div class="exp-meta">
+          <span>📅 Oct 2016 – Apr 2020</span>
+          <span>📍 Greater São Paulo, Brazil</span>
+        </div>
+        <div class="exp-desc">
+          <ul>
+            <li>Worked with Guidewire technical team — evolving, integrating and maintaining insurance services</li>
+            <li>QA focused on modernization, agile IT strategy, cloud migration, and digital transformation</li>
+            <li>Developed and implemented quality assurance policies for Web, API, and Mobile testing</li>
+            <li>Strong emphasis on mentoring other QAs, sharing knowledge, and driving technical growth</li>
+            <li>Implemented Agile development methodologies ensuring healthy project growth</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Guidewire</span>
+          <span class="exp-tag">Cloud Migration</span>
+          <span class="exp-tag">Mobile Testing</span>
+          <span class="exp-tag">Mentoring</span>
+        </div>
+      </div>
+
+      <!-- Locaweb -->
+      <div class="exp-card reveal reveal-delay-4">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Software Quality Assurance Engineer</div>
+            <div class="exp-company">Locaweb</div>
+          </div>
+          <span class="exp-badge past">3 yrs 7 mos</span>
+        </div>
+        <div class="exp-meta">
+          <span>📅 Apr 2013 – Oct 2016</span>
+          <span>📍 São Paulo, Brazil</span>
+          <span>💼 Full-time · Hybrid</span>
+        </div>
+        <div class="exp-desc">
+          <ul>
+            <li>QA in Agile projects: Email Marketing, Website Builder, SMTP, Email, VoIP and other web applications</li>
+            <li>Cross-functional collaboration with Development, POs, UX, DevOps and Application Support</li>
+            <li>Automated test cases using BDD methodology, Cucumber, Ruby, Capybara/Selenium/RSpec</li>
+            <li>Continuous integration with Jenkins and code versioning with Git</li>
+            <li>Provided test coverage reports and proposed improvements to maintain product quality</li>
+          </ul>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag">Cucumber</span>
+          <span class="exp-tag">Selenium</span>
+          <span class="exp-tag">BDD</span>
+          <span class="exp-tag">Jenkins</span>
+          <span class="exp-tag">Ruby</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CERTIFICATIONS ═══════ -->
+<section class="certifications" id="certifications">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">// certifications</p>
+      <h2 class="section-title">Continuous Learning</h2>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card ai reveal">
+        <div class="cert-icon">🤖</div>
+        <div class="cert-name">Claude Academy: MCP Advanced Topics</div>
+        <div class="cert-issuer">Anthropic</div>
+        <span class="cert-date">Nov 2026</span>
+      </div>
+      <div class="cert-card ai reveal reveal-delay-1">
+        <div class="cert-icon">🤖</div>
+        <div class="cert-name">Claude Academy: Claude Code 101</div>
+        <div class="cert-issuer">Anthropic</div>
+        <span class="cert-date">Nov 2026</span>
+      </div>
+      <div class="cert-card gcp reveal reveal-delay-1">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-name">Getting Started with Google Kubernetes Engine</div>
+        <div class="cert-issuer">Google Cloud</div>
+        <span class="cert-date">Dec 2025</span>
+      </div>
+      <div class="cert-card gcp reveal reveal-delay-2">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-name">Application Development with Cloud Run</div>
+        <div class="cert-issuer">Google Cloud</div>
+        <span class="cert-date">Sep 2025</span>
+      </div>
+      <div class="cert-card gcp reveal reveal-delay-3">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-name">Developing Applications with Google Cloud: Foundations</div>
+        <div class="cert-issuer">Google Cloud</div>
+        <span class="cert-date">Jun 2025</span>
+      </div>
+      <div class="cert-card gcp reveal reveal-delay-4">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-name">Google Cloud Fundamentals: Core Infrastructure</div>
+        <div class="cert-issuer">Google Cloud</div>
+        <span class="cert-date">Mar 2025</span>
+      </div>
+      <div class="cert-card devops reveal">
+        <div class="cert-icon">🔧</div>
+        <div class="cert-name">DevOps Essentials</div>
+        <div class="cert-issuer">CertiProf</div>
+        <span class="cert-date">Jan 2019</span>
+      </div>
+      <div class="cert-card devops reveal reveal-delay-1">
+        <div class="cert-icon">🔄</div>
+        <div class="cert-name">SCRUM Foundation</div>
+        <div class="cert-issuer">CertiProf</div>
+        <span class="cert-date">Jan 2019</span>
+      </div>
+      <div class="cert-card devops reveal reveal-delay-2">
+        <div class="cert-icon">🛡️</div>
+        <div class="cert-name">CSIRT Foundation</div>
+        <div class="cert-issuer">CERT.br</div>
+        <span class="cert-date">Aug 2016</span>
+      </div>
+      <div class="cert-card devops reveal reveal-delay-3">
+        <div class="cert-icon">📋</div>
+        <div class="cert-name">ITIL® Foundation</div>
+        <div class="cert-issuer">AXELOS</div>
+        <span class="cert-date">May 2016</span>
+      </div>
+      <div class="cert-card qa reveal reveal-delay-4">
+        <div class="cert-icon">✅</div>
+        <div class="cert-name">CTFL — Certified Tester Foundation Level</div>
+        <div class="cert-issuer">BSTQB / ISTQB</div>
+        <span class="cert-date">Jan 2016</span>
+      </div>
+      <div class="cert-card qa reveal reveal-delay-5">
+        <div class="cert-icon">🧪</div>
+        <div class="cert-name">Agile Testing</div>
+        <div class="cert-issuer">Agile Alliance</div>
+        <span class="cert-date">Jul 2014</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ EDUCATION ═══════ -->
+<section class="education" id="education">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">// education</p>
+      <h2 class="section-title">Academic Background</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-degree">Postgraduate — IT Management & Governance</div>
+        <div class="edu-school">Senac Brasil</div>
+        <div class="edu-date">Feb 2017 – Oct 2018</div>
+        <div class="edu-desc">IT Governance & Strategy, Information Security, Project Management, Strategic Sourcing, Total Quality Management, Process Analysis & Modeling.</div>
+      </div>
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-degree">Bachelor's — Systems Analysis & Development</div>
+        <div class="edu-school">FATEC-SP — São Paulo Technology College</div>
+        <div class="edu-date">Feb 2011 – Oct 2014</div>
+        <div class="edu-desc">Software Engineering, AI, Database Systems, Architecture & Computer Organization, Data Structures, Information Security, Algorithms & Logic Programming.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PROJECTS ═══════ -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">// open source & projects</p>
+      <h2 class="section-title">Side Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <a href="https://github.com/glautonvieira/ecommerce_flow" target="_blank" rel="noopener" class="project-card reveal">
+        <div class="glare"></div>
+        <div class="project-icon">🧪</div>
+        <div class="project-title">E-commerce Flow
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="project-desc">Automated end-to-end purchase flow testing for e-commerce using BDD with Ruby, Cucumber, Capybara and PhantomJS.</p>
+        <div class="project-tags">
+          <span class="project-tag">Ruby</span><span class="project-tag">Cucumber</span><span class="project-tag">Capybara</span><span class="project-tag">BDD</span>
+        </div>
+      </a>
+      <a href="https://github.com/glautonvieira/news" target="_blank" rel="noopener" class="project-card reveal reveal-delay-1">
+        <div class="glare"></div>
+        <div class="project-icon">📰</div>
+        <div class="project-title">News FAQ App
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="project-desc">Full-stack FAQ application with Angular 2 front-end and Rails 5 API back-end.</p>
+        <div class="project-tags">
+          <span class="project-tag">TypeScript</span><span class="project-tag">Angular 2</span><span class="project-tag">Rails 5</span>
+        </div>
+      </a>
+      <a href="https://github.com/glautonvieira/the-good-doctor" target="_blank" rel="noopener" class="project-card reveal reveal-delay-2">
+        <div class="glare"></div>
+        <div class="project-icon">🩺</div>
+        <div class="project-title">The Good Doctor
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="project-desc">Intelligent web scraper for medical news using Puppeteer. Automated data collection and content aggregation.</p>
+        <div class="project-tags">
+          <span class="project-tag">JavaScript</span><span class="project-tag">Puppeteer</span><span class="project-tag">Web Scraping</span>
+        </div>
+      </a>
+      <a href="https://github.com/glautonvieira/spree-commerce" target="_blank" rel="noopener" class="project-card reveal reveal-delay-3">
+        <div class="glare"></div>
+        <div class="project-icon">🛒</div>
+        <div class="project-title">Spree Commerce
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="project-desc">Full-featured e-commerce platform with Spree, i18n translations, and PostgreSQL.</p>
+        <div class="project-tags">
+          <span class="project-tag">Ruby</span><span class="project-tag">Spree</span><span class="project-tag">PostgreSQL</span><span class="project-tag">i18n</span>
+        </div>
+      </a>
+      <a href="https://github.com/glautonvieira/auth" target="_blank" rel="noopener" class="project-card reveal reveal-delay-4">
+        <div class="glare"></div>
+        <div class="project-icon">🔐</div>
+        <div class="project-title">Auth System
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="project-desc">Complete permissions and authorization management with Devise and CanCanCan. Role-based access control.</p>
+        <div class="project-tags">
+          <span class="project-tag">Ruby</span><span class="project-tag">Devise</span><span class="project-tag">CanCanCan</span><span class="project-tag">RBAC</span>
+        </div>
+      </a>
+      <a href="https://github.com/glautonvieira/fast_env" target="_blank" rel="noopener" class="project-card reveal reveal-delay-5">
+        <div class="glare"></div>
+        <div class="project-icon">⚡</div>
+        <div class="project-title">Fast Env
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+        </div>
+        <p class="project-desc">Automated dev environment provisioning with Ansible, Vagrant and VirtualBox. Zero-to-ready in one command.</p>
+        <div class="project-tags">
+          <span class="project-tag">Shell</span><span class="project-tag">Ansible</span><span class="project-tag">Vagrant</span><span class="project-tag">DevOps</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-content reveal">
+      <p class="section-label">// let's connect</p>
+      <h2 class="contact-title">Let's Build <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Quality</span> Together</h2>
+      <p class="contact-subtitle">Whether you need a QA architect, an SDET, or someone to level up your testing strategy — let's talk.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/glauton/" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/glautonvieira" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://about.me/glauton" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          About.me
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Crafted with <span class="heart">♥</span> by Glauton Vieira · <span id="year"></span></p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+// 1. PARTICLE CONSTELLATION BACKGROUND
+// ═══════════════════════════════════════════
+(function(){
+  const canvas=document.getElementById('particles-canvas');
+  const ctx=canvas.getContext('2d');
+  let particles=[],mouse={x:-1e3,y:-1e3},w,h;
+
+  function resize(){
+    const hero=document.getElementById('hero');
+    w=canvas.width=hero.offsetWidth;
+    h=canvas.height=hero.offsetHeight;
+  }
+
+  class Particle{
+    constructor(){this.reset()}
+    reset(){
+      this.x=Math.random()*w;this.y=Math.random()*h;
+      this.vx=(Math.random()-.5)*.5;this.vy=(Math.random()-.5)*.5;
+      this.r=Math.random()*1.5+.5;
+      this.alpha=Math.random()*.5+.15;
+      this.hue=190+Math.random()*40;
+    }
+    update(){
+      const dx=this.x-mouse.x,dy=this.y-mouse.y;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130){const f=(130-dist)/130*.7;this.vx+=(dx/dist)*f;this.vy+=(dy/dist)*f}
+      this.vx*=.98;this.vy*=.98;
+      this.x+=this.vx;this.y+=this.vy;
+      if(this.x<0||this.x>w)this.vx*=-1;
+      if(this.y<0||this.y>h)this.vy*=-1;
+    }
+    draw(){
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`hsla(${this.hue},80%,65%,${this.alpha})`;ctx.fill();
+    }
+  }
+
+  function init(){
+    resize();
+    const count=Math.min(130,Math.floor((w*h)/7500));
+    particles=Array.from({length:count},()=>new Particle());
+  }
+
+  function drawConnections(){
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<145){
+          ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(0,212,255,${(1-dist/145)*.12})`;ctx.lineWidth=.5;ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{p.update();p.draw()});
+    drawConnections();
+    requestAnimationFrame(animate);
+  }
+
+  canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
+  canvas.addEventListener('mouseleave',()=>{mouse.x=-1e3;mouse.y=-1e3});
+  window.addEventListener('resize',resize);
+  init();animate();
+})();
+
+// ═══════════════════════════════════════════
+// 2. TYPEWRITER EFFECT
+// ═══════════════════════════════════════════
+(function(){
+  const roles=[
+    'Software Development Engineer in Test',
+    'Test Automation Architect',
+    'QA Engineering Leader',
+    'Google Cloud Enthusiast',
+    'BDD & CI/CD Specialist',
+    'Quality Advocate'
+  ];
+  const el=document.getElementById('typewriter');
+  let ri=0,ci=0,del=false;
+
+  function type(){
+    const cur=roles[ri];
+    if(!del){
+      el.textContent=cur.substring(0,ci+1);ci++;
+      if(ci===cur.length){setTimeout(()=>{del=true;type()},2200);return}
+      setTimeout(type,55+Math.random()*35);
+    }else{
+      el.textContent=cur.substring(0,ci-1);ci--;
+      if(ci===0){del=false;ri=(ri+1)%roles.length;setTimeout(type,350);return}
+      setTimeout(type,25);
+    }
+  }
+  setTimeout(type,1200);
+})();
+
+// ═══════════════════════════════════════════
+// 3. PHYSICS ENGINE FOR SKILLS
+// ═══════════════════════════════════════════
+let physicsWorld;
+function resetPhysics(){if(physicsWorld)physicsWorld.init()}
+
+(function(){
+  const canvas=document.getElementById('physics-canvas');
+  const ctx=canvas.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+
+  const skills=[
+    // UI Testing
+    {label:'Cypress',color:'#69d3a7',r:38},
+    {label:'Selenium',color:'#43b02a',r:36},
+    {label:'RSpec',color:'#cc342d',r:33},
+    {label:'Cucumber',color:'#23d96c',tc:'#111',r:34},
+    {label:'Capybara',color:'#8e44ad',r:30},
+    {label:'Puppeteer',color:'#40b5a4',r:30},
+    {label:'Jest',color:'#c21325',r:27},
+    // API Testing
+    {label:'Postman',color:'#ff6c37',r:30},
+    {label:'HTTParty',color:'#e74c3c',r:26},
+    {label:'Faraday',color:'#4a90d9',r:25},
+    // Languages
+    {label:'Ruby',color:'#cc342d',r:36},
+    {label:'JavaScript',color:'#f7df1e',tc:'#222',r:38},
+    {label:'Python',color:'#3572A5',r:32},
+    {label:'Java',color:'#ed8b00',tc:'#222',r:30},
+    // Frameworks
+    {label:'Rails',color:'#cc0000',r:32},
+    {label:'Angular',color:'#dd0031',r:28},
+    {label:'Node.js',color:'#68a063',r:27},
+    // CI/CD & DevOps
+    {label:'Jenkins',color:'#d24939',r:28},
+    {label:'GitHub Actions',color:'#2088ff',r:32},
+    {label:'CircleCI',color:'#343434',r:26},
+    {label:'Docker',color:'#2496ed',r:28},
+    {label:'Git',color:'#f05032',r:27},
+    {label:'Ansible',color:'#ee0000',r:25},
+    // Cloud
+    {label:'GCP',color:'#4285f4',r:30},
+    {label:'AWS',color:'#ff9900',tc:'#222',r:28},
+    {label:'K8s',color:'#326ce5',r:26},
+    // DB
+    {label:'PostgreSQL',color:'#336791',r:29},
+    {label:'MySQL',color:'#00758f',r:26},
+    // Management
+    {label:'JIRA',color:'#0052cc',r:27},
+    {label:'TestRail',color:'#65c179',r:26},
+    // Methodology
+    {label:'BDD',color:'#2ee8b7',tc:'#111',r:30},
+    {label:'Scrum',color:'#009fdb',r:26},
+  ];
+
+  let bodies=[],cW,cH;
+  let mouseDown=false,mouseBody=null,mouseX=0,mouseY=0,prevMX=0,prevMY=0;
+  const G=0.35,BNC=0.6,FR=0.995;
+  let hintHidden=false;
+
+  function resizeCanvas(){
+    const container=canvas.parentElement;
+    const w=container.clientWidth;
+    const h=Math.max(420,Math.min(560,window.innerHeight*.52));
+    canvas.style.width=w+'px';canvas.style.height=h+'px';
+    canvas.width=w*dpr;canvas.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    cW=w;cH=h;
+  }
+
+  physicsWorld={
+    init(){
+      resizeCanvas();
+      bodies=skills.map(s=>({
+        x:50+Math.random()*(cW-100),y:-40-Math.random()*600,
+        vx:(Math.random()-.5)*3,vy:Math.random()*2,
+        r:s.r,mass:s.r,label:s.label,color:s.color,tc:s.tc||'#fff'
+      }));
+    }
+  };
+
+  function resolve(a,b){
+    const dx=b.x-a.x,dy=b.y-a.y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    const min=a.r+b.r;
+    if(dist<min&&dist>.001){
+      const nx=dx/dist,ny=dy/dist,ov=min-dist,tm=a.mass+b.mass;
+      a.x-=nx*ov*(b.mass/tm);a.y-=ny*ov*(b.mass/tm);
+      b.x+=nx*ov*(a.mass/tm);b.y+=ny*ov*(a.mass/tm);
+      const dvn=(a.vx-b.vx)*nx+(a.vy-b.vy)*ny;
+      if(dvn>0){
+        const imp=(dvn*2)/tm;
+        a.vx-=imp*b.mass*nx*BNC;a.vy-=imp*b.mass*ny*BNC;
+        b.vx+=imp*a.mass*nx*BNC;b.vy+=imp*a.mass*ny*BNC;
+      }
+    }
+  }
+
+  function update(){
+    for(const b of bodies){
+      if(b===mouseBody){b.vx=(mouseX-b.x)*.3;b.vy=(mouseY-b.y)*.3;b.x=mouseX;b.y=mouseY;continue}
+      b.vy+=G;b.vx*=FR;b.vy*=FR;b.x+=b.vx;b.y+=b.vy;
+      if(b.x-b.r<0){b.x=b.r;b.vx*=-BNC}
+      if(b.x+b.r>cW){b.x=cW-b.r;b.vx*=-BNC}
+      if(b.y+b.r>cH){b.y=cH-b.r;b.vy*=-BNC;if(Math.abs(b.vy)<.5)b.vy=0}
+      if(b.y-b.r<0){b.y=b.r;b.vy*=-BNC}
+    }
+    for(let i=0;i<bodies.length;i++)for(let j=i+1;j<bodies.length;j++)resolve(bodies[i],bodies[j]);
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,cW,cH);
+    for(const b of bodies){
+      ctx.shadowColor=b.color;ctx.shadowBlur=10;
+      ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+      const g=ctx.createRadialGradient(b.x-b.r*.3,b.y-b.r*.3,b.r*.1,b.x,b.y,b.r);
+      g.addColorStop(0,b.color+'ee');g.addColorStop(1,b.color+'99');
+      ctx.fillStyle=g;ctx.fill();ctx.shadowBlur=0;
+      ctx.beginPath();ctx.arc(b.x-b.r*.25,b.y-b.r*.25,b.r*.35,0,Math.PI*2);
+      ctx.fillStyle='rgba(255,255,255,.1)';ctx.fill();
+      const fs=Math.max(9,b.r*.4);
+      ctx.font=`600 ${fs}px ${getComputedStyle(document.body).fontFamily}`;
+      ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=b.tc;
+      ctx.fillText(b.label,b.x,b.y);
+    }
+  }
+
+  function getAt(x,y){for(let i=bodies.length-1;i>=0;i--){const b=bodies[i];if((x-b.x)**2+(y-b.y)**2<b.r**2)return b}return null}
+  function pos(e){const r=canvas.getBoundingClientRect();const t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
+
+  canvas.addEventListener('mousedown',e=>{const p=pos(e);mouseBody=getAt(p.x,p.y);mouseDown=true;mouseX=p.x;mouseY=p.y;if(!hintHidden){document.getElementById('skills-hint').style.opacity='0';hintHidden=true}});
+  canvas.addEventListener('mousemove',e=>{const p=pos(e);prevMX=mouseX;prevMY=mouseY;mouseX=p.x;mouseY=p.y});
+  canvas.addEventListener('mouseup',()=>{if(mouseBody){mouseBody.vx=(mouseX-prevMX)*2;mouseBody.vy=(mouseY-prevMY)*2}mouseBody=null;mouseDown=false});
+  canvas.addEventListener('touchstart',e=>{e.preventDefault();const p=pos(e);mouseBody=getAt(p.x,p.y);mouseDown=true;mouseX=p.x;mouseY=p.y;if(!hintHidden){document.getElementById('skills-hint').style.opacity='0';hintHidden=true}},{passive:false});
+  canvas.addEventListener('touchmove',e=>{e.preventDefault();const p=pos(e);prevMX=mouseX;prevMY=mouseY;mouseX=p.x;mouseY=p.y},{passive:false});
+  canvas.addEventListener('touchend',()=>{if(mouseBody){mouseBody.vx=(mouseX-prevMX)*2;mouseBody.vy=(mouseY-prevMY)*2}mouseBody=null;mouseDown=false});
+
+  function loop(){update();draw();requestAnimationFrame(loop)}
+  window.addEventListener('resize',resizeCanvas);
+
+  const obs=new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting){physicsWorld.init();loop();obs.disconnect()}
+  },{threshold:.1});
+  obs.observe(canvas);
+})();
+
+// ═══════════════════════════════════════════
+// 4. 3D TILT CARDS
+// ═══════════════════════════════════════════
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left,y=e.clientY-r.top;
+    const cx=r.width/2,cy=r.height/2;
+    const rx=((y-cy)/cy)*-5,ry=((x-cx)/cx)*5;
+    card.style.transform=`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    const gl=card.querySelector('.glare');
+    if(gl){gl.style.setProperty('--glare-x',(x/r.width*100)+'%');gl.style.setProperty('--glare-y',(y/r.height*100)+'%')}
+  });
+  card.addEventListener('mouseleave',()=>{card.style.transform=''});
+});
+
+// ═══════════════════════════════════════════
+// 5. SCROLL REVEAL
+// ═══════════════════════════════════════════
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// ═══════════════════════════════════════════
+// 6. ANIMATED COUNTERS
+// ═══════════════════════════════════════════
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const el=entry.target;const target=parseInt(el.dataset.target);
+      const suffix=el.dataset.suffix||'';
+      let cur=0;const step=Math.max(1,Math.floor(target/35));
+      const timer=setInterval(()=>{cur+=step;if(cur>=target){cur=target;clearInterval(timer)}el.textContent=cur+suffix},40);
+      counterObs.unobserve(el);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.stat-number').forEach(el=>counterObs.observe(el));
+
+// ═══════════════════════════════════════════
+// 7. NAVBAR
+// ═══════════════════════════════════════════
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
+
+// ═══════════════════════════════════════════
+// 8. SMOOTH SCROLL
+// ═══════════════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('nav-links').classList.remove('open');
+  });
+});
+
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
