@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Glauton Vieira — SDET & QA Engineer</title>
-<meta name="description" content="Glauton Vieira — Software Development Engineer in Test (SDET) at TELUS Health. 13+ years in QA, test automation, and quality engineering.">
+<title>Glauton Vieira — SDET & QA Engineering Architect</title>
+<meta name="description" content="Glauton Vieira — 10+ years empowering teams & companies to deliver software with superior quality. SDET at TELUS Health, test automation architect, SQA leader.">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -16,9 +16,39 @@
   --mono:'SF Mono','Fira Code','JetBrains Mono',Consolas,monospace;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.65}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.65;position:relative}
 a{color:inherit;text-decoration:none}
 ::selection{background:rgba(0,212,255,.25)}
+
+/* ───── PARALLAX BACKGROUND ORBS & BADGES ───── */
+.parallax-ambient-wrap{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ambient-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18;will-change:transform}
+.orb-1{top:10%;left:5%;width:380px;height:380px;background:radial-gradient(circle,#00d4ff,#7b2ff7)}
+.orb-2{top:45%;right:5%;width:420px;height:420px;background:radial-gradient(circle,#7b2ff7,#ff6b6b)}
+.orb-3{top:75%;left:15%;width:350px;height:350px;background:radial-gradient(circle,#2ee8b7,#00d4ff)}
+
+.floating-parallax-pill{
+  position:absolute;
+  padding:.45rem .9rem;
+  border-radius:50px;
+  background:rgba(26,26,48,.65);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(0,212,255,.18);
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  font-family:var(--mono);
+  font-size:.7rem;
+  color:var(--cyan);
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  white-space:nowrap;
+  pointer-events:none;
+  z-index:2;
+  will-change:transform;
+  transition:border-color .3s;
+}
+.floating-parallax-pill .pill-dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
 
 /* ───── NAV ───── */
 .nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease}
@@ -33,15 +63,15 @@ a{color:inherit;text-decoration:none}
 .nav-toggle span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
 
 /* ───── HERO ───── */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-#particles-canvas{position:absolute;inset:0;z-index:0}
-.hero-content{position:relative;z-index:1;text-align:center;padding:2rem;max-width:800px}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:1}
+#particles-canvas{position:absolute;inset:0;z-index:0;will-change:transform}
+.hero-content{position:relative;z-index:1;text-align:center;padding:2rem;max-width:860px;will-change:transform,opacity}
 .hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1rem;border-radius:50px;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.15);font-size:.75rem;color:var(--cyan);font-family:var(--mono);margin-bottom:1.5rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .2s forwards}
 .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
 .hero-name{font-size:clamp(2.5rem,7vw,4.8rem);font-weight:800;letter-spacing:-2px;line-height:1.08;margin-bottom:.75rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .4s forwards}
 .hero-name .gradient{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-title{font-size:clamp(1rem,2.5vw,1.3rem);color:var(--muted);margin-bottom:.5rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .55s forwards}
-.hero-title strong{color:var(--text);font-weight:600}
+.hero-title{font-size:clamp(1.05rem,2.4vw,1.35rem);color:var(--text);margin-bottom:.65rem;opacity:0;transform:translateY(20px);animation:fadeUp .8s .55s forwards;font-weight:400;max-width:720px;margin-left:auto;margin-right:auto;line-height:1.5}
+.hero-title .highlight{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
 .hero-roles{font-size:clamp(.9rem,2vw,1.15rem);color:var(--cyan);min-height:1.8em;margin-bottom:2rem;font-family:var(--mono);opacity:0;transform:translateY(20px);animation:fadeUp .8s .7s forwards}
 .hero-roles .cursor{display:inline-block;width:2px;height:1.1em;background:var(--cyan);margin-left:2px;vertical-align:text-bottom;animation:blink 1s step-end infinite}
 .hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(20px);animation:fadeUp .8s .85s forwards}
@@ -56,19 +86,20 @@ a{color:inherit;text-decoration:none}
 .scroll-arrow::before{content:'';position:absolute;top:6px;left:50%;width:3px;height:7px;background:var(--cyan);border-radius:2px;transform:translateX(-50%);animation:scrollBounce 2s infinite}
 
 /* ───── SECTIONS ───── */
-section{padding:6rem 2rem}
+section{padding:6rem 2rem;position:relative;z-index:1}
 .section-header{text-align:center;margin-bottom:4rem}
 .section-label{font-family:var(--mono);font-size:.75rem;color:var(--cyan);text-transform:uppercase;letter-spacing:3px;margin-bottom:.75rem}
 .section-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;letter-spacing:-1px}
-.container{max-width:1100px;margin:0 auto}
+.container{max-width:1100px;margin:0 auto;position:relative}
 
-/* ───── ABOUT ───── */
+/* ───── ABOUT WITH PARALLAX ───── */
 .about{background:var(--bg2)}
 .about-grid{display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:center}
-.about-avatar{position:relative;width:200px;height:200px;margin:0 auto}
+.about-avatar-parallax-container{position:relative;width:220px;height:220px;margin:0 auto;overflow:hidden;border-radius:50%;padding:4px}
+.about-avatar{position:relative;width:100%;height:100%}
 .about-avatar-ring{position:absolute;inset:-8px;border-radius:50%;background:var(--grad);opacity:.45;animation:spin 10s linear infinite;filter:blur(1px)}
-.about-avatar-img{position:relative;width:200px;height:200px;border-radius:50%;overflow:hidden;border:3px solid var(--bg2);z-index:1;display:flex;align-items:center;justify-content:center;background:var(--card);font-size:4.5rem;font-weight:800;color:var(--cyan)}
-.about-avatar-img img{width:100%;height:100%;object-fit:cover}
+.about-avatar-img{position:relative;width:200px;height:200px;border-radius:50%;overflow:hidden;border:3px solid var(--bg2);z-index:1;display:flex;align-items:center;justify-content:center;background:var(--card);font-size:4.5rem;font-weight:800;color:var(--cyan);margin:0 auto}
+.about-avatar-img img{width:115%;height:115%;object-fit:cover;will-change:transform;transition:transform .15s ease-out}
 .about-text h3{font-size:1.4rem;margin-bottom:.75rem}
 .about-text h3 .company{color:var(--cyan);font-weight:600}
 .about-text p{color:var(--muted);margin-bottom:1rem;font-size:.95rem}
@@ -116,19 +147,59 @@ section{padding:6rem 2rem}
 .exp-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
 .exp-tag{padding:.2rem .5rem;border-radius:5px;font-size:.65rem;font-family:var(--mono);background:rgba(0,212,255,.06);color:rgba(0,212,255,.7);border:1px solid rgba(0,212,255,.08)}
 
-/* ───── CERTIFICATIONS ───── */
+/* ───── CERTIFICATIONS WITH VERIFIED BADGES & LINKS ───── */
 .certifications{background:var(--bg)}
-.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
-.cert-card{background:var(--card);border-radius:12px;padding:1.25rem;border:1px solid rgba(122,122,152,.08);transition:all .3s;position:relative;overflow:hidden}
-.cert-card:hover{border-color:rgba(0,212,255,.15);transform:translateY(-3px)}
-.cert-card .cert-icon{font-size:1.5rem;margin-bottom:.75rem}
-.cert-card .cert-name{font-size:.88rem;font-weight:600;margin-bottom:.35rem;line-height:1.3}
-.cert-card .cert-issuer{font-size:.75rem;color:var(--muted);margin-bottom:.5rem}
-.cert-card .cert-date{font-size:.7rem;font-family:var(--mono);color:var(--cyan);padding:.2rem .5rem;background:rgba(0,212,255,.06);border-radius:4px;display:inline-block}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem}
+.cert-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:1.25rem;
+  border:1px solid rgba(122,122,152,.08);
+  transition:all .3s ease;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.cert-card.has-link{cursor:pointer}
+.cert-card.has-link:hover{
+  border-color:rgba(0,212,255,.3);
+  transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,212,255,.1);
+}
+.cert-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.65rem}
+.cert-icon{font-size:1.5rem}
+.cert-verify-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:.3rem;
+  padding:.2rem .55rem;
+  border-radius:50px;
+  background:rgba(46,232,183,.1);
+  color:var(--teal);
+  border:1px solid rgba(46,232,183,.25);
+  font-family:var(--mono);
+  font-size:.62rem;
+  font-weight:600;
+  transition:all .2s;
+}
+.cert-card:hover .cert-verify-badge{
+  background:var(--teal);
+  color:#070710;
+}
+.cert-name{font-size:.88rem;font-weight:600;margin-bottom:.35rem;line-height:1.3}
+.cert-issuer{font-size:.75rem;color:var(--muted);margin-bottom:.6rem}
+.cert-id{font-size:.65rem;font-family:var(--mono);color:var(--dim);margin-bottom:.6rem;word-break:break-all}
+.cert-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:.4rem;border-top:1px solid rgba(122,122,152,.06)}
+.cert-date{font-size:.68rem;font-family:var(--mono);color:var(--cyan);padding:.15rem .45rem;background:rgba(0,212,255,.06);border-radius:4px}
+.cert-link-text{font-size:.7rem;color:var(--teal);font-weight:600;display:inline-flex;align-items:center;gap:.25rem}
+
 .cert-card.gcp{border-left:3px solid #4285f4}
 .cert-card.qa{border-left:3px solid var(--teal)}
 .cert-card.devops{border-left:3px solid var(--gold)}
 .cert-card.ai{border-left:3px solid var(--purple)}
+.cert-card.sec{border-left:3px solid var(--coral)}
+.cert-card.lang{border-left:3px solid #ff9900}
 
 /* ───── EDUCATION ───── */
 .education{background:var(--bg2)}
@@ -199,6 +270,7 @@ section{padding:6rem 2rem}
   .edu-grid{grid-template-columns:1fr}
   section{padding:4rem 1.25rem}
   .exp-header{flex-direction:column}
+  .floating-parallax-pill{display:none} /* Clean mobile view */
 }
 @media(max-width:480px){
   .hero-cta{flex-direction:column;align-items:center}
@@ -207,6 +279,31 @@ section{padding:6rem 2rem}
 </style>
 </head>
 <body>
+
+<!-- ═══════ PARALLAX AMBIENT BACKGROUND ═══════ -->
+<div class="parallax-ambient-wrap">
+  <div class="ambient-orb orb-1" data-parallax-speed="-0.15"></div>
+  <div class="ambient-orb orb-2" data-parallax-speed="0.2"></div>
+  <div class="ambient-orb orb-3" data-parallax-speed="-0.1"></div>
+
+  <!-- Floating Parallax Experience Badges (SimpleParallax depth style) -->
+  <div class="floating-parallax-pill" style="top:22%;left:8%;" data-parallax-speed="0.35">
+    <span class="pill-dot"></span>
+    10+ Years SQA Leadership
+  </div>
+  <div class="floating-parallax-pill" style="top:38%;right:7%;" data-parallax-speed="-0.25">
+    <span class="pill-dot"></span>
+    Continuous Testing & BDD
+  </div>
+  <div class="floating-parallax-pill" style="top:62%;left:5%;" data-parallax-speed="0.28">
+    <span class="pill-dot"></span>
+    Cloud & Container Architecture
+  </div>
+  <div class="floating-parallax-pill" style="top:80%;right:9%;" data-parallax-speed="-0.32">
+    <span class="pill-dot"></span>
+    Zero-Defect Pipeline Focus
+  </div>
+</div>
 
 <!-- ═══════ NAVIGATION ═══════ -->
 <nav class="nav" id="nav">
@@ -227,18 +324,18 @@ section{padding:6rem 2rem}
 <!-- ═══════ HERO ═══════ -->
 <section class="hero" id="hero">
   <canvas id="particles-canvas"></canvas>
-  <div class="hero-content">
+  <div class="hero-content" id="hero-content">
     <div class="hero-badge">
       <span class="dot"></span>
-      Available for opportunities
+      Available for high-impact opportunities
     </div>
     <h1 class="hero-name">Glauton <span class="gradient">Vieira</span></h1>
-    <p class="hero-title"><strong>SDET</strong> at TELUS Health · Edmonton, Canada 🇨🇦</p>
+    <p class="hero-title"><span class="highlight">10+ years</span> empowering teams & companies to deliver software with superior quality</p>
     <p class="hero-roles"><span id="typewriter"></span><span class="cursor"></span></p>
     <div class="hero-cta">
       <a href="#experience" class="btn btn-primary">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        13+ Years in QA
+        Professional Experience
       </a>
       <a href="#contact" class="btn btn-outline">Get in Touch</a>
     </div>
@@ -258,41 +355,42 @@ section{padding:6rem 2rem}
     </div>
     <div class="about-grid">
       <div class="about-avatar reveal">
-        <div class="about-avatar-ring"></div>
-        <div class="about-avatar-img">
-          <img src="https://avatars.githubusercontent.com/u/11621414?v=4" alt="Glauton Vieira"
-               onerror="this.style.display='none';this.parentNode.textContent='G'">
+        <div class="about-avatar-parallax-container">
+          <div class="about-avatar-ring"></div>
+          <div class="about-avatar-img">
+            <img id="avatar-parallax-img" src="https://avatars.githubusercontent.com/u/11621414?v=4" alt="Glauton Vieira"
+                 onerror="this.style.display='none';this.parentNode.textContent='G'">
+          </div>
         </div>
       </div>
       <div class="about-text reveal reveal-delay-1">
         <h3>SDET at <span class="company">TELUS Health</span></h3>
         <p>
-          Software Development Engineer in Test with <strong>13+ years</strong> dedicated to
-          software quality. I specialize in building robust test automation architectures,
-          implementing SQA processes from the ground up, and ensuring quality at every stage
-          of the development cycle.
+          Software Development Engineer in Test with <strong>10+ years</strong> dedicated to
+          software quality and test architecture. I specialize in building robust test automation frameworks,
+          implementing SQA processes from scratch, and establishing agile quality standards at every stage
+          of the software development lifecycle.
         </p>
         <p>
           My journey spans across <strong>4 countries</strong> — from São Paulo to Mexico City,
-          San Francisco, and now Edmonton — working with e-commerce, insurance,
-          telecommunications, and healthcare platforms. Currently focused on
-          <strong>test architecture and cloud-native automation</strong>.
+          San Francisco, and now Edmonton, Canada 🇨🇦 — partnering with cross-cultural engineering teams
+          in e-commerce, insurance, telecommunications, and healthcare platforms.
         </p>
         <div class="about-tags">
           <span class="about-tag">Test Automation</span>
-          <span class="about-tag">CI/CD</span>
-          <span class="about-tag">BDD</span>
+          <span class="about-tag">CI/CD Architecture</span>
+          <span class="about-tag">BDD & Page Objects</span>
           <span class="about-tag">Google Cloud</span>
-          <span class="about-tag">Agile/Scrum</span>
-          <span class="about-tag">SQA Processes</span>
+          <span class="about-tag">Agile / Scrum / Kanban</span>
+          <span class="about-tag">SQA Governance</span>
         </div>
         <div class="about-stats">
           <div class="stat">
-            <div class="stat-number" data-target="13">0</div>
+            <div class="stat-number" data-target="10" data-suffix="+">0</div>
             <div class="stat-label">Years in QA</div>
           </div>
           <div class="stat">
-            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-number" data-target="15">0</div>
             <div class="stat-label">Certifications</div>
           </div>
           <div class="stat">
@@ -496,86 +594,222 @@ section{padding:6rem 2rem}
   </div>
 </section>
 
-<!-- ═══════ CERTIFICATIONS ═══════ -->
+<!-- ═══════ CERTIFICATIONS WITH VERIFIED BADGES & LINKS ═══════ -->
 <section class="certifications" id="certifications">
   <div class="container">
     <div class="section-header reveal">
-      <p class="section-label">// certifications</p>
-      <h2 class="section-title">Continuous Learning</h2>
+      <p class="section-label">// verified credentials</p>
+      <h2 class="section-title">Licenses & Certifications</h2>
     </div>
     <div class="certs-grid">
-      <div class="cert-card ai reveal">
-        <div class="cert-icon">🤖</div>
-        <div class="cert-name">Claude Academy: MCP Advanced Topics</div>
+
+      <!-- Claude Academy MCP -->
+      <a href="https://academy.claude.com/verify/4d7e0513b467727293e839a3c1323d26" target="_blank" rel="noopener" class="cert-card ai has-link reveal">
+        <div class="cert-top">
+          <div class="cert-icon">🤖</div>
+          <span class="cert-verify-badge">Verified ↗</span>
+        </div>
+        <div class="cert-name">Claude Academy: Model Context Protocol (MCP)</div>
         <div class="cert-issuer">Anthropic</div>
-        <span class="cert-date">Nov 2026</span>
-      </div>
-      <div class="cert-card ai reveal reveal-delay-1">
-        <div class="cert-icon">🤖</div>
+        <div class="cert-id">ID: 4d7e0513b4677272...</div>
+        <div class="cert-footer">
+          <span class="cert-date">Nov 2026</span>
+          <span class="cert-link-text">Show Credential ↗</span>
+        </div>
+      </a>
+
+      <!-- Claude Academy Claude Code 101 -->
+      <a href="https://academy.claude.com/verify/73d2ca4b7b71d8fb0b2563887a975bff" target="_blank" rel="noopener" class="cert-card ai has-link reveal reveal-delay-1">
+        <div class="cert-top">
+          <div class="cert-icon">🤖</div>
+          <span class="cert-verify-badge">Verified ↗</span>
+        </div>
         <div class="cert-name">Claude Academy: Claude Code 101</div>
         <div class="cert-issuer">Anthropic</div>
-        <span class="cert-date">Nov 2026</span>
-      </div>
-      <div class="cert-card gcp reveal reveal-delay-1">
-        <div class="cert-icon">☁️</div>
+        <div class="cert-id">ID: 73d2ca4b7b71d8fb...</div>
+        <div class="cert-footer">
+          <span class="cert-date">Nov 2026</span>
+          <span class="cert-link-text">Show Credential ↗</span>
+        </div>
+      </a>
+
+      <!-- Google Kubernetes Engine -->
+      <a href="https://www.skills.google/course_templates/2/badge" target="_blank" rel="noopener" class="cert-card gcp has-link reveal reveal-delay-2">
+        <div class="cert-top">
+          <div class="cert-icon">☁️</div>
+          <span class="cert-verify-badge">Badge ↗</span>
+        </div>
         <div class="cert-name">Getting Started with Google Kubernetes Engine</div>
         <div class="cert-issuer">Google Cloud</div>
-        <span class="cert-date">Dec 2025</span>
-      </div>
-      <div class="cert-card gcp reveal reveal-delay-2">
-        <div class="cert-icon">☁️</div>
+        <div class="cert-footer">
+          <span class="cert-date">Dec 2025</span>
+          <span class="cert-link-text">View Badge ↗</span>
+        </div>
+      </a>
+
+      <!-- Cloud Run -->
+      <a href="https://partner.cloudskillsboost.google/course_templates/371" target="_blank" rel="noopener" class="cert-card gcp has-link reveal reveal-delay-3">
+        <div class="cert-top">
+          <div class="cert-icon">☁️</div>
+          <span class="cert-verify-badge">Badge ↗</span>
+        </div>
         <div class="cert-name">Application Development with Cloud Run</div>
-        <div class="cert-issuer">Google Cloud</div>
-        <span class="cert-date">Sep 2025</span>
-      </div>
-      <div class="cert-card gcp reveal reveal-delay-3">
-        <div class="cert-icon">☁️</div>
+        <div class="cert-issuer">Google Cloud Skills Boost</div>
+        <div class="cert-footer">
+          <span class="cert-date">Sep 2025</span>
+          <span class="cert-link-text">View Badge ↗</span>
+        </div>
+      </a>
+
+      <!-- Developing Apps with GCP -->
+      <a href="https://partner.cloudskillsboost.google/course_templates/874" target="_blank" rel="noopener" class="cert-card gcp has-link reveal">
+        <div class="cert-top">
+          <div class="cert-icon">☁️</div>
+          <span class="cert-verify-badge">Badge ↗</span>
+        </div>
         <div class="cert-name">Developing Applications with Google Cloud: Foundations</div>
-        <div class="cert-issuer">Google Cloud</div>
-        <span class="cert-date">Jun 2025</span>
-      </div>
-      <div class="cert-card gcp reveal reveal-delay-4">
-        <div class="cert-icon">☁️</div>
+        <div class="cert-issuer">Google Cloud Skills Boost</div>
+        <div class="cert-footer">
+          <span class="cert-date">Jun 2025</span>
+          <span class="cert-link-text">View Badge ↗</span>
+        </div>
+      </a>
+
+      <!-- WES Credly -->
+      <a href="https://www.credly.com/badges/acda4e68-1325-49b4-8d94-6b45eb33c532" target="_blank" rel="noopener" class="cert-card qa has-link reveal reveal-delay-1">
+        <div class="cert-top">
+          <div class="cert-icon">🎖️</div>
+          <span class="cert-verify-badge">Credly ↗</span>
+        </div>
+        <div class="cert-name">International Academic Qualifications</div>
+        <div class="cert-issuer">World Education Services (WES)</div>
+        <div class="cert-id">Credly Verified</div>
+        <div class="cert-footer">
+          <span class="cert-date">May 2025</span>
+          <span class="cert-link-text">Verify Credly ↗</span>
+        </div>
+      </a>
+
+      <!-- Google Cloud Fundamentals -->
+      <a href="https://www.cloudskillsboost.google/course_templates/60" target="_blank" rel="noopener" class="cert-card gcp has-link reveal reveal-delay-2">
+        <div class="cert-top">
+          <div class="cert-icon">☁️</div>
+          <span class="cert-verify-badge">Badge ↗</span>
+        </div>
         <div class="cert-name">Google Cloud Fundamentals: Core Infrastructure</div>
-        <div class="cert-issuer">Google Cloud</div>
-        <span class="cert-date">Mar 2025</span>
-      </div>
-      <div class="cert-card devops reveal">
-        <div class="cert-icon">🔧</div>
-        <div class="cert-name">DevOps Essentials</div>
-        <div class="cert-issuer">CertiProf</div>
-        <span class="cert-date">Jan 2019</span>
-      </div>
-      <div class="cert-card devops reveal reveal-delay-1">
-        <div class="cert-icon">🔄</div>
-        <div class="cert-name">SCRUM Foundation</div>
-        <div class="cert-issuer">CertiProf</div>
-        <span class="cert-date">Jan 2019</span>
-      </div>
+        <div class="cert-issuer">Google Cloud Skills Boost</div>
+        <div class="cert-footer">
+          <span class="cert-date">Mar 2025</span>
+          <span class="cert-link-text">View Badge ↗</span>
+        </div>
+      </a>
+
+      <!-- OWASP Top 10 -->
+      <a href="https://www.linkedin.com/learning/certificates/62bec7a8a5eb0893310a6db98cdb488abe067ac2e38707e8f99d3f538a619125/" target="_blank" rel="noopener" class="cert-card sec has-link reveal reveal-delay-3">
+        <div class="cert-top">
+          <div class="cert-icon">🛡️</div>
+          <span class="cert-verify-badge">Certificate ↗</span>
+        </div>
+        <div class="cert-name">Master the OWASP Top 10</div>
+        <div class="cert-issuer">LinkedIn Learning</div>
+        <div class="cert-footer">
+          <span class="cert-date">Dec 2024</span>
+          <span class="cert-link-text">Show Certificate ↗</span>
+        </div>
+      </a>
+
+      <!-- Emmersion English -->
+      <a href="https://app.emmersion.ai/tn/test-taker/report/0795fbfd-1b14-41ea-a155-3dde79979a71/339e4cc9-d97b-4136-9d79-39d4dbf8db7b" target="_blank" rel="noopener" class="cert-card lang has-link reveal">
+        <div class="cert-top">
+          <div class="cert-icon">🗣️</div>
+          <span class="cert-verify-badge">Report ↗</span>
+        </div>
+        <div class="cert-name">English Speaking Assessment</div>
+        <div class="cert-issuer">Emmersion</div>
+        <div class="cert-footer">
+          <span class="cert-date">Mar 2021</span>
+          <span class="cert-link-text">View Report ↗</span>
+        </div>
+      </a>
+
+      <!-- CTFL ISTQB -->
+      <a href="http://scr.istqb.org/?name=&number=15-ctfl-04601-br&orderBy=relevancy&orderDirection=&dateStart=&dateEnd=&expiryStart=&expiryEnd=&certificationBody=&examProvider=&certificationLevel=&country=&resultsPerPage=10" target="_blank" rel="noopener" class="cert-card qa has-link reveal reveal-delay-1">
+        <div class="cert-top">
+          <div class="cert-icon">✅</div>
+          <span class="cert-verify-badge">ISTQB Registry ↗</span>
+        </div>
+        <div class="cert-name">Certified Tester Foundation Level (CTFL)</div>
+        <div class="cert-issuer">BSTQB / ISTQB®</div>
+        <div class="cert-id">Reg: 15-ctfl-04601-br</div>
+        <div class="cert-footer">
+          <span class="cert-date">Jan 2016</span>
+          <span class="cert-link-text">Verify Registry ↗</span>
+        </div>
+      </a>
+
+      <!-- DevOps Essentials -->
       <div class="cert-card devops reveal reveal-delay-2">
-        <div class="cert-icon">🛡️</div>
-        <div class="cert-name">CSIRT Foundation</div>
-        <div class="cert-issuer">CERT.br</div>
-        <span class="cert-date">Aug 2016</span>
+        <div class="cert-top">
+          <div class="cert-icon">🔧</div>
+        </div>
+        <div class="cert-name">DevOps Essentials Professional Certificate (DEPC)</div>
+        <div class="cert-issuer">CertiProf</div>
+        <div class="cert-footer">
+          <span class="cert-date">Jan 2019</span>
+        </div>
       </div>
+
+      <!-- SCRUM Foundation -->
       <div class="cert-card devops reveal reveal-delay-3">
-        <div class="cert-icon">📋</div>
-        <div class="cert-name">ITIL® Foundation</div>
-        <div class="cert-issuer">AXELOS</div>
-        <span class="cert-date">May 2016</span>
+        <div class="cert-top">
+          <div class="cert-icon">🔄</div>
+        </div>
+        <div class="cert-name">SCRUM Foundation Professional Certificate (SFPC)</div>
+        <div class="cert-issuer">CertiProf</div>
+        <div class="cert-footer">
+          <span class="cert-date">Jan 2019</span>
+        </div>
       </div>
-      <div class="cert-card qa reveal reveal-delay-4">
-        <div class="cert-icon">✅</div>
-        <div class="cert-name">CTFL — Certified Tester Foundation Level</div>
-        <div class="cert-issuer">BSTQB / ISTQB</div>
-        <span class="cert-date">Jan 2016</span>
+
+      <!-- CSIRT Foundation -->
+      <div class="cert-card devops reveal">
+        <div class="cert-top">
+          <div class="cert-icon">🛡️</div>
+        </div>
+        <div class="cert-name">CSIRT Foundation Certificate</div>
+        <div class="cert-issuer">ITCERTS / CERT.br</div>
+        <div class="cert-id">ID: 5F5E421</div>
+        <div class="cert-footer">
+          <span class="cert-date">Aug 2016</span>
+        </div>
       </div>
-      <div class="cert-card qa reveal reveal-delay-5">
-        <div class="cert-icon">🧪</div>
-        <div class="cert-name">Agile Testing</div>
-        <div class="cert-issuer">Agile Alliance</div>
-        <span class="cert-date">Jul 2014</span>
+
+      <!-- ITIL Foundation -->
+      <div class="cert-card devops reveal reveal-delay-1">
+        <div class="cert-top">
+          <div class="cert-icon">📋</div>
+        </div>
+        <div class="cert-name">ITIL® Foundation in IT Service Management</div>
+        <div class="cert-issuer">AXELOS / IT Partners</div>
+        <div class="cert-footer">
+          <span class="cert-date">May 2016</span>
+        </div>
       </div>
+
+      <!-- Agile Testing -->
+      <a href="https://www.linkedin.com/in/glauton/details/certifications/" target="_blank" rel="noopener" class="cert-card qa has-link reveal reveal-delay-2">
+        <div class="cert-top">
+          <div class="cert-icon">🧪</div>
+          <span class="cert-verify-badge">LinkedIn ↗</span>
+        </div>
+        <div class="cert-name">Agile Testing Certification</div>
+        <div class="cert-issuer">Adaptworks / Agile Alliance</div>
+        <div class="cert-footer">
+          <span class="cert-date">Aug 2014</span>
+          <span class="cert-link-text">View on Profile ↗</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -715,7 +949,60 @@ section{padding:6rem 2rem}
 
 <script>
 // ═══════════════════════════════════════════
-// 1. PARTICLE CONSTELLATION BACKGROUND
+// 1. SIMPLEPARALLAX & SMOOTH PARALLAX ENGINE
+// ═══════════════════════════════════════════
+(function initParallaxEngine(){
+  const heroContent = document.getElementById('hero-content');
+  const avatarImg = document.getElementById('avatar-parallax-img');
+  const parallaxItems = document.querySelectorAll('[data-parallax-speed]');
+
+  let ticking = false;
+
+  function updateParallax(){
+    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    const windowH = window.innerHeight;
+
+    // A. Hero Content Subtle Parallax Drift & Fade
+    if(heroContent && scrollY < windowH){
+      const heroOffset = scrollY * 0.32;
+      const heroOpacity = Math.max(0, 1 - (scrollY / (windowH * 0.85)));
+      heroContent.style.transform = `translate3d(0, ${heroOffset}px, 0)`;
+      heroContent.style.opacity = heroOpacity;
+    }
+
+    // B. SimpleParallax Effect on About Avatar Image
+    if(avatarImg){
+      const rect = avatarImg.getBoundingClientRect();
+      if(rect.top < windowH && rect.bottom > 0){
+        // Percent scrolled across screen (-1 to 1)
+        const scrollPercent = (rect.top - windowH / 2) / (windowH / 2);
+        const transY = scrollPercent * 24; // gentle parallax shift
+        avatarImg.style.transform = `scale(1.12) translate3d(0, ${transY}px, 0)`;
+      }
+    }
+
+    // C. Ambient Floating Elements & Orbs
+    parallaxItems.forEach(el => {
+      const speed = parseFloat(el.getAttribute('data-parallax-speed')) || 0.1;
+      const yOffset = scrollY * speed;
+      el.style.transform = `translate3d(0, ${yOffset}px, 0)`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if(!ticking){
+      window.requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateParallax();
+})();
+
+// ═══════════════════════════════════════════
+// 2. PARTICLE CONSTELLATION BACKGROUND
 // ═══════════════════════════════════════════
 (function(){
   const canvas=document.getElementById('particles-canvas');
@@ -785,7 +1072,7 @@ section{padding:6rem 2rem}
 })();
 
 // ═══════════════════════════════════════════
-// 2. TYPEWRITER EFFECT
+// 3. TYPEWRITER EFFECT
 // ═══════════════════════════════════════════
 (function(){
   const roles=[
@@ -815,7 +1102,7 @@ section{padding:6rem 2rem}
 })();
 
 // ═══════════════════════════════════════════
-// 3. PHYSICS ENGINE FOR SKILLS
+// 4. PHYSICS ENGINE FOR SKILLS
 // ═══════════════════════════════════════════
 let physicsWorld;
 function resetPhysics(){if(physicsWorld)physicsWorld.init()}
@@ -961,7 +1248,7 @@ function resetPhysics(){if(physicsWorld)physicsWorld.init()}
 })();
 
 // ═══════════════════════════════════════════
-// 4. 3D TILT CARDS
+// 5. 3D TILT CARDS
 // ═══════════════════════════════════════════
 document.querySelectorAll('.project-card').forEach(card=>{
   card.addEventListener('mousemove',e=>{
@@ -977,7 +1264,7 @@ document.querySelectorAll('.project-card').forEach(card=>{
 });
 
 // ═══════════════════════════════════════════
-// 5. SCROLL REVEAL
+// 6. SCROLL REVEAL
 // ═══════════════════════════════════════════
 const revealObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
@@ -985,7 +1272,7 @@ const revealObs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 
 // ═══════════════════════════════════════════
-// 6. ANIMATED COUNTERS
+// 7. ANIMATED COUNTERS
 // ═══════════════════════════════════════════
 const counterObs=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
@@ -1001,12 +1288,12 @@ const counterObs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.stat-number').forEach(el=>counterObs.observe(el));
 
 // ═══════════════════════════════════════════
-// 7. NAVBAR
+// 8. NAVBAR
 // ═══════════════════════════════════════════
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
 
 // ═══════════════════════════════════════════
-// 8. SMOOTH SCROLL
+// 9. SMOOTH SCROLL
 // ═══════════════════════════════════════════
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
